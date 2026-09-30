@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><meta charset="utf-8">
+<title>Where is the Pain? | وين الألم</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1a19;--c:#132728;--b:#27494a;--t:#3fc1bd;--x:#e9f2f2;--m:#9db3b3;--g:#62d08a;--bt:#04201f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f1f8f7;--c:#fff;--b:#c4dada;--x:#10302f;--m:#4f6b6b;--t:#19a8a2}}
+:root[data-theme="light"]{--bg:#f1f8f7;--c:#fff;--b:#c4dada;--x:#10302f;--m:#4f6b6b;--t:#19a8a2}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--x);font-family:Tajawal,system-ui,sans-serif;line-height:1.7}
+#app{max-width:520px;margin:auto;padding:14px 18px 40px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.pill,.ic{background:var(--c);color:var(--x);border:1px solid var(--b);border-radius:22px;padding:8px 20px;font:700 16px Tajawal,system-ui;cursor:pointer}
+.ic{padding:8px 14px}
+h1{font-size:40px;line-height:1.3;font-weight:800;margin:14px 0 4px}
+h1.s{font-size:30px}
+h2{color:var(--t);font-size:22px;font-weight:500;margin-bottom:14px}
+h3{font-size:20px;margin:22px 0 8px}
+.lead{color:var(--m);font-size:18px;margin-bottom:18px}
+.card{background:var(--c);border:1px solid var(--b);border-radius:16px;padding:14px 16px;margin:10px 0}
+.card b{display:block}.card p,.card li,small{color:var(--m)}
+.card ul{padding-inline-start:20px}
+.warn{background:rgba(242,193,78,.12);border-color:rgba(242,193,78,.5)}
+.ok{background:rgba(98,208,138,.12);border-color:rgba(98,208,138,.5)}
+.btn{display:block;width:100%;background:var(--t);color:var(--bt);border:0;border-radius:14px;padding:16px;font:800 19px Tajawal,system-ui;margin:14px 0;cursor:pointer}
+.btn.o{background:transparent;color:var(--x);border:1px solid var(--b)}
+.btn:disabled{opacity:.4}
+.bub{display:flex;gap:10px;align-items:flex-start;margin:10px 0 16px}
+.bub i{flex:none;width:42px;height:42px;border-radius:50%;background:var(--t);display:grid;place-items:center;font-style:normal;font-size:21px}
+.bub>div{background:var(--c);border:1px solid var(--b);border-radius:16px;border-start-start-radius:4px;padding:10px 14px;font-size:18px}
+.opt{display:block;width:100%;text-align:start;background:var(--c);color:var(--x);border:1px solid var(--b);border-radius:14px;padding:13px 16px;margin:8px 0;font:500 18px Tajawal,system-ui;cursor:pointer}
+.opt.on,.chip.on{border-color:var(--t);background:rgba(63,193,189,.2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{background:var(--c);color:var(--x);border:1px solid var(--b);border-radius:20px;padding:8px 15px;font:500 16px Tajawal,system-ui;cursor:pointer}
+.seg{display:flex;gap:8px;justify-content:center;margin:6px 0}
+.body svg{width:190px;display:block;margin:auto}
+svg [data-r]{fill:var(--c);stroke:var(--b);stroke-width:1.5;cursor:pointer}
+svg .j{stroke:var(--g);stroke-width:2.5}
+svg .on{fill:var(--t)}
+.sel{text-align:center;font-weight:700;margin:6px 0}
+.prog{height:6px;background:var(--c);border-radius:4px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--t)}
+.bar{height:8px;border-radius:4px;background:var(--b);margin:4px 0 12px}
+.bar i{display:block;height:100%;border-radius:4px;background:var(--t)}
+.lv{display:inline-block;color:#111;font-weight:800;border-radius:12px;padding:2px 12px}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;margin-inline-end:10px;vertical-align:middle}
+input{width:100%;background:var(--c);color:var(--x);border:1px solid var(--b);border-radius:14px;padding:14px;font:600 22px Tajawal,system-ui;text-align:center}
+</style></head><body><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s);
+const S={l:0,st:'w',h:[],age:'',reg:'',sub:'',v:'f',dur:-1,int:0,a:{},ai:{},fl:[],qi:0,Q:[],more:0,nm:0};
+const T=a=>a[S.l];
+const y=(k,e,a,t)=>({k,e:[e,a],o:[['Yes','نعم',t],['No','لا','']]});
+const NS=['Not sure','ما أدري',''];
+const IC=['#62d08a','#b4dc5e','#f2c14e','#f29a4e','#ea6a5e'];
+const LV=[['Low','منخفض'],['Below moderate','أقل من المتوسط'],['Moderate','متوسط'],['Above moderate','أعلى من المتوسط'],['High','عالي']];
+const DU=[['1 minute','دقيقة'],['5 minutes','5 دقائق'],['10 minutes','10 دقائق'],['15 minutes','15 دقيقة'],['30 minutes','نصف ساعة'],['1 hour','ساعة'],['3 hours','3 ساعات'],['12 hours','12 ساعة'],['1 day','يوم'],['2 days','يومين'],['3 days','3 أيام'],['1 week','أسبوع'],['2 weeks','أسبوعين'],['1 month','شهر'],['3 months','3 أشهر'],['1 year','سنة'],['2 years','سنتين'],['3+ years','3 سنوات أو أكثر']];
+const FL=[['Chest pain or pressure','ألم أو ضغط في الصدر',1],['Shortness of breath','ضيق نفس',1],['Fainting or severe dizziness','إغماء أو دوخة شديدة',1],['Sudden severe pain','ألم شديد مفاجئ',1],['Face drooping, slurred speech or sudden weakness','التواء الوجه أو ثقل الكلام أو ضعف مفاجئ',1],['High fever with stiff neck','حرارة عالية مع تيبّس الرقبة',1],['Visible deformity after injury','تشوه واضح بعد إصابة',0],['Blood in vomit, stool or urine','دم في القيء أو البراز أو البول',0]];
+const G=[
+{k:'ty',e:['How would you describe the pain?','كيف تصف الألم؟'],o:[['Sharp / stabbing','حاد مثل الطعنة','sharp'],['Dull / aching','وجع ممل مستمر','dull'],['Burning','حارق','burn'],['Throbbing / pulsing','نابض','throb'],['Cramping / squeezing','تقلصات أو انقباض','cramp'],['Shooting / electric','يمتد مثل الكهرباء','shoot'],['Pressure / heaviness','ضغط أو ثقل','press']]},
+{k:'on',e:['How did it start?','كيف بدأ الألم؟'],o:[['Suddenly','فجأة','sudden'],['Gradually over time','تدريجياً','gradual'],['After an injury, fall or twist','بعد إصابة أو سقطة أو التواء','injury'],['After effort or exercise','بعد مجهود أو رياضة','exert']]},
+{k:'pa',e:['How does the pain behave?','كيف يتصرف الألم؟'],o:[['Constant','مستمر','const'],['Comes and goes','يجي ويروح','inter'],['Worse at night','يزيد في الليل','nightw']]},
+{k:'wo',e:['What makes it worse?','وش يزيده؟'],o:[['Movement','الحركة','move'],['Resting','الراحة والسكون','restw'],['Pressing on it','الضغط عليه','touch'],['Eating or swallowing','الأكل أو البلع','meal'],['Deep breath or cough','نفس عميق أو كحة','breath'],['Hot or cold things','الحار أو البارد','sens'],['Nothing in particular','لا شيء محدد','']]},
+{k:'re',e:['What eases it?','وش يخففه؟'],o:[['Rest','الراحة','restr'],['Moving around','الحركة','mover'],['Warmth','الدفء','warm'],['Cold','البرودة','coldr'],['Painkillers','المسكنات','pk'],['Nothing helps','ما شي يخففه','']]},
+y('sp','Does the pain spread to another area?','هل ينتشر الألم لمنطقة ثانية؟','spread'),
+{k:'sw',e:['Any swelling or redness?','في تورم أو احمرار؟'],o:[['Swelling','تورم','swell'],['Redness or warmth','احمرار أو سخونة','red'],['Both','الاثنين','swell red'],['None','لا','']]},
+{k:'st',e:['Is it stiff in the morning?','في تيبّس الصبح؟'],o:[['Yes, under 30 min','نعم، أقل من نصف ساعة','stiff'],['Yes, over 30 min','نعم، أكثر من نصف ساعة','stiff'],['No','لا','']]},
+y('wk','Does it wake you from sleep?','هل يوقظك من النوم؟','wake'),
+y('fe','Do you have a fever or chills?','هل عندك حرارة أو قشعريرة؟','fever'),
+y('nu','Any numbness or tingling?','هل في تنميل أو خدر؟','numb'),
+y('we','Any weakness in the area?','هل في ضعف في المنطقة؟','weak'),
+{k:'rc',e:['Have you had this before?','هل سبق وجاك نفس الألم؟'],o:[['First time','أول مرة',''],['Yes, it comes back','نعم، يتكرر','recur']]}];
+const X=[y('x1','Stressed or sleeping poorly lately?','هل أنت متوتر أو نومك قليل مؤخراً؟','stress'),y('x2','Long hours on screens, desk or driving?','هل تقضي ساعات طويلة أمام الشاشة أو المكتب أو القيادة؟','desk strain'),y('x3','Started a new sport or activity recently?','هل بدأت رياضة أو نشاطاً جديداً مؤخراً؟','overuse'),y('x4','Does family have similar pain?','هل أحد من عائلتك عنده ألم مشابه؟','fam'),y('x5','Is it worse in the evening?','هل يزيد الألم في المساء؟','strain')];
+const K={
+head:{q:[y('h1','Does light or noise bother you?','هل يزعجك الضوء أو الصوت؟','photo'),y('h2','Any nausea or vomiting?','هل في غثيان أو تقيؤ؟','nausea'),y('h3','Blocked nose or pressure in forehead or cheeks?','هل في انسداد أنف أو ضغط في الجبهة أو الخدين؟','sinus')],
+m:['Paracetamol (Panadol); ibuprofen (Brufen) if suitable; saline nasal spray for sinus','باراسيتامول (بنادول)؛ إيبوبروفين (بروفين) إن ناسبك؛ بخاخ ملحي للأنف عند الجيوب'],
+tips:[['Regular sleep and fewer screens','نوم منتظم وشاشات أقل'],['Drink water through the day','اشرب ماء طوال اليوم']],
+ex:[['Slow breathing, 5 minutes','تنفس بطيء 5 دقائق'],['Gentle neck rolls and temple massage','حركات رقبة لطيفة وتدليك الصدغين'],['Rest only until a doctor advises','راحة فقط حتى يوجّهك الطبيب']]},
+oral:{q:[y('o1','Does it hurt when chewing or biting?','هل يوجع عند المضغ أو العض؟','chew'),y('o2','Sensitive to hot, cold or sweets?','هل هو حساس للحار أو البارد أو الحلويات؟','sens'),y('o3','Any bleeding, pus, bad taste or swelling?','هل في نزيف أو صديد أو طعم سيء أو تورم؟','pus')],
+m:['Paracetamol; ibuprofen; chlorhexidine mouthwash; benzocaine gel for ulcers','باراسيتامول؛ إيبوبروفين؛ غسول كلورهكسيدين؛ جل بنزوكايين للقروح'],
+tips:[['Soft foods until it settles','أطعمة طرية حتى يهدأ'],['Avoid smoking and sugary drinks','تجنب التدخين والمشروبات السكرية']],
+ex:[['Relax jaw: tongue up, teeth apart, 1 minute','أرخِ الفك: اللسان للأعلى والأسنان متباعدة دقيقة'],['Warm salt rinse 3 times a day','مضمضة بماء دافئ وملح 3 مرات يومياً'],['Soft diet and see a dentist soon','أكل طري وراجع طبيب الأسنان قريباً']]},
+spine:{q:[y('s1','Does pain travel down an arm or leg?','هل يمتد الألم لليد أو الرجل؟','radiate'),y('s2','Long hours sitting or on screens?','هل تجلس ساعات طويلة أو على الشاشات؟','desk'),y('s3','Worse when bending or lifting?','هل يزيد عند الانحناء أو الحمل؟','bend')],
+m:['Ibuprofen; diclofenac gel (Voltaren); paracetamol','إيبوبروفين؛ جل ديكلوفيناك (فولتارين)؛ باراسيتامول'],
+tips:[['Change position every 30 minutes','غيّر وضعيتك كل 30 دقيقة'],['Sleep with a supportive pillow','نم على وسادة داعمة']],
+ex:[['Gentle stretching 5 minutes, then a short walk','تمدد لطيف 5 دقائق ثم مشي قصير'],['Cat-cow stretch, 10 repetitions','تمرين القط والبقرة 10 مرات'],['Rest in a comfortable position, no lifting','ارتح بوضعية مريحة بدون حمل']]},
+msk:{q:[y('m1','Any clicking, locking or giving way?','هل في طقطقة أو انحباس أو خذلان؟','lock'),y('m2','Repetitive or heavy use lately?','هل في استخدام متكرر أو مجهود زائد مؤخراً؟','overuse'),y('m3','Any previous injury here?','هل سبقت إصابة في هذي المنطقة؟','oldinj')],
+m:['Diclofenac gel (Voltaren); ibuprofen; paracetamol','جل ديكلوفيناك (فولتارين)؛ إيبوبروفين؛ باراسيتامول'],
+tips:[['Raise the area and avoid overuse','ارفع المنطقة وتجنب الإجهاد'],['Compression bandage if swollen','رباط ضاغط إن وُجد تورم']],
+ex:[['Gentle circles of movement, 10 each way','حركات دائرية لطيفة 10 مرات لكل اتجاه'],['Light stretch, then strengthening 2 sets of 10','تمدد خفيف ثم تقوية مجموعتين من 10'],['Rest and support it, no exercise until checked','راحة وتثبيت بدون تمارين حتى يفحصك الطبيب']]},
+trunk:{q:[y('t1','Is it linked to meals?','هل له علاقة بالأكل؟','meal'),y('t2','Nausea, bloating or change in bowel habits?','هل في غثيان أو انتفاخ أو تغير في الإخراج؟','gi'),y('t3','Heartburn or sour taste in the mouth?','هل في حرقة أو طعم حامض في الفم؟','acid')],
+m:['Antacid (Gaviscon); hyoscine (Buscopan) for cramps; paracetamol','مضاد حموضة (جافيسكون)؛ هيوسين (بوسكوبان) للتقلصات؛ باراسيتامول'],
+tips:[['Smaller, lighter meals','وجبات أصغر وأخف'],['Warm pack on the abdomen for cramps','كمادة دافئة على البطن للتقلصات']],
+ex:[['Short gentle walk, 10 minutes','مشي لطيف قصير 10 دقائق'],['Deep belly breathing, 5 minutes','تنفس بطني عميق 5 دقائق'],['Rest, no exercise','راحة بدون تمارين']]}};
+const R={
+head:{n:['Head','الرأس'],k:'head',t:['Rest in a dim quiet room','ارتح في غرفة هادئة خافتة'],r:['Worse in the evening after screens?','يزيد المساء بعد الشاشات؟','strain'],c:[['Tension headache','صداع توتري','dull:2 press:2 strain:3 stress:2 const:1'],['Migraine','شقيقة','throb:2 photo:3 nausea:2 inter:1 recur:1'],['Sinus headache','صداع الجيوب','sinus:3 fever:1 press:1']]},
+eye:{n:['Eye','العين'],k:'head',t:['20-20-20 rule: every 20 min look far for 20 sec','قاعدة 20-20-20: كل 20 دقيقة انظر بعيداً 20 ثانية'],r:['Watery, itchy or gritty eye?','دمع أو حكة أو إحساس برمل؟','red'],c:[['Eye strain','إجهاد العين','strain:3 dull:2 gradual:1'],['Conjunctivitis or dry eye','التهاب ملتحمة أو جفاف','red:3 burn:2 touch:1'],['Referred headache','صداع منعكس على العين','throb:2 photo:3 sinus:1']]},
+ear:{n:['Ear','الأذن'],k:'head',t:['Keep the ear dry; no cotton buds','أبقِ الأذن جافة بدون أعواد قطن'],r:['Muffled hearing or ringing?','سمع مكتوم أو طنين؟','hear'],c:[['Middle ear infection','التهاب الأذن الوسطى','fever:2 throb:2 hear:2 sudden:1'],['Earwax blockage','انسداد بشمع الأذن','hear:3 gradual:2 dull:1'],['Outer ear irritation','التهاب الأذن الخارجية','touch:3 red:2 swell:1']]},
+mouth:{n:['Mouth','الفم'],sub:['teeth','gums','sore','jaw']},
+teeth:{n:['Teeth','الأسنان'],k:'oral',t:['Warm salt rinse; avoid very hot or cold food','مضمضة بماء دافئ وملح وتجنب الساخن والبارد'],r:['Broken filling or visible hole?','حشوة مكسورة أو حفرة ظاهرة؟','cav'],s:1,c:[['Tooth decay','تسوس الأسنان','cav:3 sens:3 gradual:1'],['Tooth abscess','خراج في السن','throb:3 pus:3 fever:2 swell:2 wake:1'],['Cracked tooth or grinding','تشقق السن أو طحن','chew:3 sharp:2 sudden:1 stress:1']]},
+gums:{n:['Gums','اللثة'],k:'oral',t:['Brush gently with a soft brush; floss daily','فرشاة ناعمة بلطف وخيط أسنان يومياً'],r:['Do gums bleed when brushing?','هل تنزف اللثة عند التفريش؟','pus'],s:1,c:[['Gingivitis','التهاب اللثة','pus:2 red:2 touch:2 gradual:1'],['Periodontitis','التهاب دواعم السن','pus:3 gradual:2 chronic:2 old:1'],['Wisdom tooth','ضرس العقل','dull:2 chew:2 swell:1 spread:1']]},
+sore:{n:['Tongue and mouth sores','اللسان وقرح الفم'],k:'oral',t:['Avoid spicy and acidic food; salt-water rinse','تجنب الحار والحامض وتمضمض بماء وملح'],r:['Visible white or red sore?','قرحة بيضاء أو حمراء ظاهرة؟','red'],s:1,c:[['Canker ulcer','قرحة فموية','burn:2 touch:3 meal:2 recur:1'],['Oral infection or thrush','التهاب أو فطريات','burn:2 red:2 fever:1'],['Irritation from food or braces','تهيج من طعام أو تقويم','touch:2 meal:2 injury:1']]},
+jaw:{n:['Jaw joint','مفصل الفك'],k:'oral',t:['Open slowly in front of a mirror, 10 times','افتح الفم ببطء أمام المرآة 10 مرات'],r:['Does the jaw click or lock?','هل يطقطق الفك أو ينحبس؟','lock'],s:1,c:[['TMJ disorder','اضطراب مفصل الفك','lock:3 chew:2 move:2 stiff:1'],['Teeth grinding','صرير الأسنان','stress:3 stiff:2 nightw:1 wake:1'],['Dental referred pain','ألم سني منعكس','sens:2 throb:2 pus:1']]},
+throat:{n:['Throat','الحلق'],k:'head',t:['Warm drinks with honey; rest your voice','مشروبات دافئة بعسل وأرح صوتك'],r:['Cough, hoarseness or runny nose?','كحة أو بحة أو رشح؟','cough'],c:[['Viral sore throat','التهاب حلق فيروسي','cough:3 fever:2 meal:2 sudden:1'],['Tonsillitis','التهاب اللوزتين','fever:3 swell:2 pus:2 meal:1'],['Acid reflux irritation','تهيج من الارتجاع','burn:2 gradual:1 chronic:2 recur:1']]},
+neck:{n:['Neck','الرقبة'],k:'spine',t:['Chin tucks: hold 5 sec, repeat 10','اسحب الذقن للخلف 5 ثوان وكرر 10 مرات'],r:['Stiff after sleeping awkwardly?','تيبّس بعد نوم بوضعية خاطئة؟','stiff'],c:[['Muscle strain or posture','شد عضلي أو وضعية خاطئة','desk:3 stiff:2 move:2 injury:2'],['Pinched nerve (cervical)','انضغاط عصب الرقبة','radiate:3 numb:3 shoot:2 weak:1'],['Neck arthritis','خشونة الرقبة','old:3 stiff:2 chronic:2 gradual:1']]},
+shoulder:{n:['Shoulder','الكتف'],k:'msk',t:['Pendulum swings: let the arm hang and sway 1 minute','أرجح الذراع المتدلية بلطف دقيقة'],r:['Painful lifting the arm overhead?','يوجع عند رفع الذراع فوق الرأس؟','move'],c:[['Rotator cuff tendinitis','التهاب أوتار الكتف','move:3 overuse:2 wake:2 gradual:1'],['Frozen shoulder','تيبّس الكتف','stiff:3 chronic:2 move:2 old:1'],['Sprain or strain','التواء أو شد','injury:3 sudden:2 swell:1']]},
+chest:{n:['Chest','الصدر'],k:'trunk',t:['Sit upright, breathe slowly, stop any effort','اجلس باعتدال وتنفس ببطء وأوقف أي مجهود'],r:['Pressure with breathlessness or sweating?','ضغط مع ضيق نفس أو تعرق؟','press'],c:[['Muscle or rib cartilage pain','ألم عضلي أو غضروفي','touch:3 move:2 breath:2 sharp:1'],['Acid reflux','ارتجاع معدي','acid:3 burn:3 meal:2'],['Heart or lung cause (needs a check)','سبب قلبي أو رئوي (يحتاج فحصاً)','press:3 exert:3 spread:2 breath:1 weak:1']]},
+upab:{n:['Upper abdomen','أعلى البطن'],k:'trunk',t:['Avoid fatty, spicy food and coffee','تجنب الدسم والحار والقهوة'],r:['Bloating or burping?','انتفاخ أو تجشؤ؟','gi'],c:[['Gastritis or indigestion','التهاب المعدة أو عسر هضم','meal:3 burn:2 acid:2 gi:1'],['Gallbladder irritation','الحويصلة المرارية','meal:2 cramp:2 gi:2 sharp:1'],['Gas and spasm','غازات وتقلصات','cramp:3 gi:2 inter:1']]},
+loab:{n:['Lower abdomen','أسفل البطن'],k:'trunk',t:['Drink water, eat fibre, walk gently','اشرب ماء وتناول ألياف وامشِ بهدوء'],r:['Burning when urinating?','حرقة عند التبول؟','burn'],c:[['Gas or constipation','غازات أو إمساك','cramp:2 gi:3 inter:2'],['Urinary infection','التهاب مجاري بولية','burn:3 fever:1 recur:1'],['Appendix problem (needs a check)','احتمال التهاب الزائدة (يحتاج فحصاً)','sharp:2 const:2 fever:2 sudden:1 move:2']]},
+upback:{n:['Upper back','أعلى الظهر'],k:'spine',t:['Squeeze shoulder blades 10 times, hold 5 sec','شدّ لوحي الكتف معاً 10 مرات مع ثبات 5 ثوان'],r:['Between shoulder blades after desk work?','بين لوحي الكتف بعد المكتب؟','desk'],c:[['Muscle strain or posture','شد عضلي أو وضعية','desk:3 dull:2 move:2 bend:1'],['Rib joint or nerve','مفصل ضلعي أو عصب','sharp:2 breath:3 touch:1'],['Disc problem','مشكلة في القرص','radiate:3 numb:2 chronic:1']]},
+loback:{n:['Lower back','أسفل الظهر'],k:'spine',t:['Knee-to-chest stretch, 20-30 sec each leg','شد الركبة للصدر 20-30 ثانية لكل ساق'],r:['Does it spread to buttock or leg?','هل يمتد للأرداف أو الرجل؟','radiate'],c:[['Lower back strain','شد أسفل الظهر','bend:3 exert:2 dull:2 injury:1 desk:1'],['Disc or sciatica','انزلاق غضروفي أو عرق النسا','radiate:3 shoot:3 numb:2'],['Kidney cause (needs a check)','سبب كلوي (يحتاج فحصاً)','cramp:3 fever:2 sudden:2 sharp:1']]},
+arm:{n:['Arm','الذراع'],k:'msk',t:['Rest the arm; warm up before using it','أرح الذراع وسخّنها قبل الاستخدام'],r:['Heavy lifting or exercise lately?','رفع ثقيل أو تمرين مؤخراً؟','exert'],c:[['Muscle strain','شد عضلي','overuse:3 move:2 exert:3'],['Nerve compression','ضغط على عصب','numb:3 shoot:2 radiate:1'],['Bruise or fracture','كدمة أو كسر','injury:3 swell:3 weak:2']]},
+elbow:{n:['Elbow','المرفق'],k:'msk',t:['Wrist stretch: arm straight, bend hand down 20 sec','مد الذراع واثنِ اليد للأسفل 20 ثانية'],r:['Pain when gripping or twisting?','ألم عند القبض أو اللف؟','overuse'],c:[['Tennis or golfer elbow','التهاب أوتار المرفق','overuse:3 move:2 touch:2'],['Bursitis','التهاب الجراب','swell:3 touch:2 red:1'],['Injury','إصابة','injury:3 lock:2 swell:1']]},
+wrist:{n:['Wrist','الرسغ'],k:'msk',t:['Wrist flexion and extension stretch; night splint','تمديد الرسغ وجبيرة ليلية'],r:['Worse with typing or phone use?','يزيد مع الكتابة أو الجوال؟','desk'],c:[['Carpal tunnel','متلازمة النفق الرسغي','numb:3 wake:2 desk:2 overuse:1'],['Tendinitis','التهاب أوتار','overuse:3 move:2 touch:1'],['Sprain or fracture','التواء أو كسر','injury:3 swell:2 sudden:1']]},
+hip:{n:['Hip','الورك'],k:'msk',t:['Figure-4 stretch lying down, 30 sec each side','تمدد رقم 4 مستلقياً 30 ثانية لكل جهة'],r:['Hurts getting up or walking?','يوجع عند القيام أو المشي؟','move'],c:[['Hip arthritis','خشونة الورك','old:3 stiff:2 chronic:2 move:1'],['Bursitis or tendon','التهاب جراب أو وتر','wake:2 touch:2 overuse:2'],['Strain or sciatica','شد أو عرق النسا','radiate:2 injury:2 exert:2']]},
+thigh:{n:['Thigh','الفخذ'],k:'msk',t:['Gentle thigh stretch after warming up','تمدد لطيف للفخذ بعد الإحماء'],r:['Cramp-like, after exercise?','مثل شد بعد التمرين؟','exert'],c:[['Muscle strain','شد عضلي','exert:3 injury:2 sudden:1'],['Nerve pain','ألم عصبي','radiate:3 numb:3 burn:1'],['Vein clot (needs a check)','جلطة وريدية (تحتاج فحصاً)','swell:3 red:2 const:2']]},
+knee:{n:['Knee','الركبة'],k:'msk',t:['Straight-leg raises, 10 reps','رفع الساق مستقيمة 10 مرات'],r:['Pain on stairs?','ألم على الدرج؟','bend'],c:[['Knee osteoarthritis','خشونة الركبة','old:3 stiff:2 chronic:2 move:1'],['Ligament or meniscus injury','إصابة رباط أو غضروف','injury:3 lock:3 swell:2'],['Kneecap overuse pain','ألم الرضفة من الإجهاد','overuse:3 bend:3 move:1']]},
+leg:{n:['Lower leg','الساق'],k:'msk',t:['Calf stretch on a wall, 30 sec; drink water','تمدد السمانة على الحائط 30 ثانية واشرب ماء'],r:['Calf tight or swollen on one side?','السمانة مشدودة أو متورمة بجهة؟','swell'],c:[['Muscle cramp or shin splints','شد أو التهاب سمانة','exert:3 cramp:3 overuse:2'],['Vein problem (needs a check)','مشكلة وريدية (تحتاج فحصاً)','swell:3 red:2 const:2'],['Nerve pain','ألم عصبي','numb:3 radiate:2 shoot:2']]},
+ankle:{n:['Ankle','الكاحل'],k:'msk',t:['RICE, then write the alphabet with your foot','راحة وثلج وضغط ورفع ثم اكتب الأبجدية بالقدم'],r:['Twisted it recently?','التوى مؤخراً؟','injury'],c:[['Ankle sprain','التواء الكاحل','injury:4 swell:3 sudden:2'],['Achilles tendinitis','التهاب وتر أخيل','overuse:3 move:2 stiff:1'],['Gout or arthritis','نقرس أو التهاب مفصل','red:3 swell:2 wake:2 sudden:1']]},
+foot:{n:['Foot','القدم'],k:'msk',t:['Roll the foot over a bottle; supportive shoes','دحرج القدم على زجاجة وحذاء مريح'],r:['Worst with the first steps in the morning?','أسوأ مع أول خطوات الصباح؟','stiff'],c:[['Plantar fasciitis','التهاب اللفافة الأخمصية','stiff:3 move:2 sharp:1 gradual:1'],['Stress injury or fracture','إجهاد أو كسر','injury:3 overuse:2 swell:2'],['Gout or neuropathy','نقرس أو اعتلال عصب','red:2 burn:3 numb:2 wake:1']]}};
+const J=['shoulder','elbow','wrist','hip','knee','ankle'];
+const SH=[['head','ellipse','cx="100" cy="32" rx="22" ry="26"','fb'],['neck','rect','x="88" y="58" width="24" height="16" rx="4"','fb'],['chest','rect','x="72" y="78" width="56" height="40" rx="8"','f'],['upab','rect','x="74" y="120" width="52" height="30" rx="6"','f'],['loab','rect','x="74" y="152" width="52" height="30" rx="6"','f'],['upback','rect','x="72" y="78" width="56" height="50" rx="8"','b'],['loback','rect','x="74" y="130" width="52" height="52" rx="8"','b'],
+['arm','rect','x="50" y="98" width="14" height="44" rx="6"','fb'],['arm','rect','x="136" y="98" width="14" height="44" rx="6"','fb'],['arm','rect','x="48" y="160" width="14" height="44" rx="6"','fb'],['arm','rect','x="138" y="160" width="14" height="44" rx="6"','fb'],
+['thigh','rect','x="76" y="210" width="22" height="68" rx="8"','fb'],['thigh','rect','x="102" y="210" width="22" height="68" rx="8"','fb'],['leg','rect','x="78" y="300" width="18" height="58" rx="7"','fb'],['leg','rect','x="104" y="300" width="18" height="58" rx="7"','fb'],['foot','ellipse','cx="85" cy="382" rx="13" ry="7"','fb'],['foot','ellipse','cx="115" cy="382" rx="13" ry="7"','fb'],
+['eye','circle','cx="91" cy="28" r="4"','f'],['eye','circle','cx="109" cy="28" r="4"','f'],['ear','circle','cx="77" cy="34" r="4"','fb'],['ear','circle','cx="123" cy="34" r="4"','fb'],['mouth','ellipse','cx="100" cy="46" rx="9" ry="4"','f'],['throat','rect','x="94" y="60" width="12" height="10" rx="3"','f'],
+['shoulder','circle','cx="66" cy="88" r="10"','fb'],['shoulder','circle','cx="134" cy="88" r="10"','fb'],['elbow','circle','cx="57" cy="151" r="8"','fb'],['elbow','circle','cx="143" cy="151" r="8"','fb'],['wrist','circle','cx="55" cy="212" r="7"','fb'],['wrist','circle','cx="145" cy="212" r="7"','fb'],['hip','circle','cx="84" cy="196" r="10"','fb'],['hip','circle','cx="116" cy="196" r="10"','fb'],['knee','circle','cx="87" cy="288" r="10"','fb'],['knee','circle','cx="113" cy="288" r="10"','fb'],['ankle','circle','cx="87" cy="366" r="6"','fb'],['ankle','circle','cx="113" cy="366" r="6"','fb']];
+const svg=v=>'<svg viewBox="0 0 200 395">'+SH.filter(s=>s[3].includes(v)).map(s=>`<${s[1]} ${s[2]} data-r="${s[0]}" class="${J.includes(s[0])?'j ':''}${S.reg==s[0]?'on':''}"/>`).join('')+'</svg>';
+const B=(e,a,s)=>`<div class="bub"><i>🩺</i><div><p>${T([e,a])}</p>${s?`<small>${T(s)}</small>`:''}</div></div>`;
+const regs=()=>Object.keys(R).filter(k=>!R[k].s);
+const V={
+w:()=>B('Hello, welcome to your consultation here. I will ask a few questions, one at a time, to work out where your pain may come from.','مرحباً بك في استشارتك هنا. بسألك أسئلة وحدة وحدة عشان نقرّب لك مكان ألمك المحتمل.')+`<h1>${T(['Where is the Pain?','وين الألم؟'])}</h1><h2>${T(['وين الألم','Where is the Pain?'])}</h2><p class="lead">${T(['Feeling pain but not sure where it comes from? Answer detailed questions and we will narrow down the likely cause and suggest relief methods that fit the area.','تحس بألم وما تدري من وين؟ جاوب على أسئلة دقيقة ونقرّب لك مكانه المحتمل ونعطيك طرق تخفيف تناسب مكان ألمك.'])}</p><div class="card"><b>${T(['Before you start','قبل ما نبدأ'])}</b><p>${T(['This app gives general guidance only. It does not diagnose and does not replace a doctor.','هذا التطبيق يعطي إرشادات عامة فقط، ولا يشخّص ولا يغني عن الطبيب.'])}</p></div><button class="btn" onclick="go('age')">${T(['I understand, start','فهمت، ابدأ'])}</button>`,
+age:()=>B('How old are you?','كم عمرك؟',['Age changes the advice and the level of caution.','العمر يغيّر النصيحة ودرجة الحذر.'])+`<input id="ag" type="number" inputmode="numeric" min="1" max="120" value="${S.age}" placeholder="${T(['Age in years','العمر بالسنوات'])}"><button class="btn" onclick="sa()">${T(['Continue','متابعة'])}</button>`,
+map:()=>B('Where does it hurt? Tap the body or pick from the list.','وين يوجعك؟ اضغط على الجسم أو اختر من القائمة.')+`<div class="seg">${[['f','Front','الأمام'],['b','Back','الخلف']].map(o=>`<button class="chip ${S.v==o[0]?'on':''}" onclick="S.v='${o[0]}';r(1)">${T([o[1],o[2]])}</button>`).join('')}</div><div class="body">${svg(S.v)}</div><p class="sel">${S.reg?T(R[S.reg].n):T(['Nothing selected yet','لم تختر بعد'])}</p><div class="chips">${regs().map(k=>`<button class="chip ${S.reg==k?'on':''}" onclick="pr('${k}')">${T(R[k].n)}</button>`).join('')}</div><button class="btn" ${S.reg?'':'disabled'} onclick="go(S.reg=='mouth'?'sub':'dur')">${T(['Continue','متابعة'])}</button>`,
+sub:()=>B('Which part of the mouth?','أي جزء من الفم؟')+R.mouth.sub.map(k=>`<button class="opt" onclick="S.sub='${k}';go('dur')">${T(R[k].n)}</button>`).join('')+`<button class="opt" onclick="S.sub='teeth';go('dur')">${T(NS)}</button>`,
+dur:()=>B('How long have you had this pain?','من متى تحس بهذا الألم؟')+`<div class="chips">${DU.map((d,i)=>`<button class="chip ${S.dur==i?'on':''}" onclick="S.dur=${i};go('int')">${T(d)}</button>`).join('')}</div>`,
+int:()=>B('How strong is the pain right now?','قد إيش شدة الألم الحين؟')+LV.map((d,i)=>`<button class="opt ${S.int==i+1?'on':''}" onclick="sn(${i+1})"><span class="dot" style="background:${IC[i]}"></span>${i+1} · ${T(d)}</button>`).join(''),
+q:()=>{const x=S.Q[S.qi],o=x.o.concat([NS]);return `<div class="prog"><i style="width:${(S.qi+1)/S.Q.length*100}%"></i></div><small>${S.qi+1} / ${S.Q.length}</small>`+B(x.e[0],x.e[1])+o.map((p,i)=>`<button class="opt ${S.ai[x.k]===i?'on':''}" onclick="an(${i})">${T(p)}</button>`).join('')},
+fl:()=>B('Do you have any of these right now? Tick all that apply.','هل عندك أي من هذي الأعراض الحين؟ اختر كل ما ينطبق.')+FL.map((f,i)=>`<button class="opt ${S.fl.includes(i)?'on':''}" onclick="tf(${i})">${T(f)}</button>`).join('')+`<button class="btn" onclick="go('res')">${S.fl.length?T(['Continue','متابعة']):T(['None of these, continue','لا شيء منها، متابعة'])}</button>`,
+res:()=>{const id=S.sub||S.reg,g=R[id],k=K[g.k],L=S.int,tg=[];
+Object.values(S.a).forEach(v=>v&&tg.push(...v.split(' ')));
+if(S.age>=50)tg.push('old');tg.push(S.dur>=13?'chronic':'acute');
+const sc=g.c.map(c=>{let s=0;c[2].split(' ').forEach(p=>{const[a,w]=p.split(':');if(tg.includes(a))s+=+w});return[c,s]}).sort((a,b)=>b[1]-a[1]),mx=Math.max(1,sc[0][1]);
+let u=0;if(S.fl.length)u=1;if(S.fl.some(i=>FL[i][2]))u=2;if(L>=4||(tg.includes('chronic')&&L>=3))u=Math.max(u,1);if(S.reg=='chest')u=Math.max(u,1);
+const UM=[['Self-care is reasonable for now. If the pain grows a lot or lasts, see a doctor.','العناية الذاتية مناسبة حالياً. وإذا زاد الألم كثيراً أو طال، راجع الطبيب.'],['It is better to see a doctor soon to check this properly.','الأفضل تراجع الطبيب قريباً للفحص الصحيح.'],['Please get medical care today, or go to emergency if it is getting worse.','يُفضّل مراجعة الطبيب اليوم، أو الطوارئ إذا كان الألم يزداد.']];
+const cw=/injury|swell|red/.test(tg.join(' '))?['Cold pack 15 minutes every few hours for the first 48 hours','كمادة باردة 15 دقيقة كل بضع ساعات أول 48 ساعة']:/warm|stiff|restr|chronic/.test(tg.join(' '))?['Warm pack 15-20 minutes to relax the area','كمادة دافئة 15-20 دقيقة لإرخاء المنطقة']:['Try cold and warm in turn and keep what feels better','جرّب الباردة ثم الدافئة واعتمد اللي يريحك'];
+const RK=[['Most likely','الأكثر احتمالاً'],['Possible','محتمل'],['Less likely','أقل احتمالاً']],li=a=>'<ul>'+a.map(t=>`<li>${T(t)}</li>`).join('')+'</ul>';
+return `<h1 class="s">${T(['Your result','نتيجتك'])}</h1><div class="card"><b>${S.sub?T(R[S.reg].n)+' › ':''}${T(g.n)}</b><p>${T(['Pain level','مستوى الألم'])}: <span class="lv" style="background:${IC[L-1]}">${L}/5 · ${T(LV[L-1])}</span></p><p>${T(['Duration','المدة'])}: ${T(DU[S.dur])} · ${T(['Age','العمر'])}: ${S.age}</p></div>
+<div class="card ${u?'warn':'ok'}"><p>${T(UM[u])}</p></div>
+<h3>${T(['Likely causes','الأسباب المحتملة'])}</h3>${sc.map((c,i)=>`<div><b>${T(RK[i])}: ${T(c[0])}</b><div class="bar"><i style="width:${Math.max(10,c[1]/mx*100)}%"></i></div></div>`).join('')}${sc[0][1]<4?`<div class="card"><p>${T(['Your answers do not point clearly to one cause yet. Answer more questions to sharpen the result.','إجاباتك ما تحدد سبب واحد بوضوح للحين. جاوب على أسئلة أكثر لتوضيح النتيجة.'])}</p></div>`:''}
+<h3>${T(['Ways to ease it','طرق التخفيف'])}</h3><div class="card">${li([cw,...k.tips])}</div>
+<h3>${T(['Exercises for your pain level','تمارين تناسب مستوى ألمك'])}</h3><div class="card">${li([g.t,k.ex[L<=2?0:L==3?1:2]])}</div>
+<h3>${T(['Medicines people ask a pharmacist about','أدوية يسأل عنها الناس الصيدلي'])}</h3><div class="card"><p>${T(k.m)}</p><p>${T(['Ask a pharmacist or doctor first, especially for children, pregnancy, stomach or kidney problems.','اسأل الصيدلي أو الطبيب أولاً، خصوصاً للأطفال والحمل ومشاكل المعدة أو الكلى.'])}${S.age<12?' '+T(['For children, no medicine without a doctor.','للأطفال: لا دواء بدون طبيب.']):''}</p></div>
+${S.nm?`<div class="card"><p>${T(['No more questions left. You can finish or restart.','ما بقي أسئلة إضافية. تقدر تنهي أو تبدأ من جديد.'])}</p></div>`:''}
+<button class="btn" onclick="more()">${T(['Answer more questions to refine','جاوب على أسئلة أكثر لتدقيق النتيجة'])}</button><button class="btn o" onclick="go('end')">${T(['Finish','إنهاء'])}</button>`},
+end:()=>`<h1 class="s">${T(['Take care','سلامتك'])}</h1><svg viewBox="0 0 240 150" width="100%"><rect width="240" height="150" rx="18" fill="var(--c)" stroke="var(--b)"/><circle cx="70" cy="75" r="42" fill="var(--t)"/><path d="M70 52v46M47 75h46" stroke="#fff" stroke-width="12" stroke-linecap="round"/><path d="M122 98l16-30 16 44 14-28h30" fill="none" stroke="var(--t)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="card warn"><b>${T(['If the pain increases or you need more help, see a doctor.','إذا زاد الألم أو احتجت مساعدة أكثر، راجع الطبيب.'])}</b><ul><li>${T(['Pain increases a lot or becomes unbearable','زاد الألم بشكل كبير أو صار لا يُحتمل'])}</li><li>${T(['Fever, swelling, numbness or weakness appears','ظهرت حرارة أو تورم أو تنميل أو ضعف'])}</li><li>${T(['No improvement after a few days of self-care','ما تحسّن بعد أيام من العناية الذاتية'])}</li><li>${T(['Pain after a strong blow or fall','ألم بعد ضربة أو سقطة قوية'])}</li></ul></div><p class="lead">${T(['General guidance only. It does not diagnose and does not replace a doctor.','إرشادات عامة فقط. لا يشخّص ولا يغني عن الطبيب.'])}</p><button class="btn o" onclick="S.st='res';r()">${T(['Back to results','الرجوع للنتيجة'])}</button><button class="btn" onclick="rs()">${T(['Start over','ابدأ من جديد'])}</button>`};
+function r(k){const d=document.documentElement;d.lang=S.l?'ar':'en';d.dir=S.l?'rtl':'ltr';
+$('#app').innerHTML=`<div class="top">${S.st!='w'?`<button class="ic" onclick="bk()">${S.l?'→':'←'}</button>`:'<span></span>'}<button class="pill" onclick="sl()">${S.l?'EN':'عربي'}</button></div>`+V[S.st]();if(!k)scrollTo(0,0)}
+function sl(){S.l=1-S.l;r(1)}
+function go(s){S.h.push(S.st);S.st=s;r()}
+function bk(){if(S.st=='q'&&S.qi>0){S.qi--;r()}else{S.st=S.h.pop()||'w';r()}}
+function sa(){const v=+$('#ag').value;if(!(v>=1&&v<=120)){$('#ag').style.borderColor='#ea6a5e';return}S.age=v;go('map')}
+function pr(k){S.reg=k;S.sub='';r(1)}
+function sn(L){S.int=L;const g=R[S.sub||S.reg];S.Q=[...G,...K[g.k].q,{k:'rq',e:[g.r[0],g.r[1]],o:[['Yes','نعم',g.r[2]],['No','لا','']]}];S.qi=0;go('q')}
+function an(i){const x=S.Q[S.qi],o=x.o.concat([NS])[i];S.a[x.k]=o[2];S.ai[x.k]=i;if(S.qi<S.Q.length-1){S.qi++;r()}else if(S.more){S.more=0;go('res')}else go('fl')}
+function tf(i){const j=S.fl.indexOf(i);j<0?S.fl.push(i):S.fl.splice(j,1);r(1)}
+function more(){const ex=X.filter(x=>!(x.k in S.a));if(!ex.length){S.nm=1;r(1);return}S.Q=S.Q.concat(ex);S.qi=S.Q.length-ex.length;S.more=1;go('q')}
+function rs(){Object.assign(S,{st:'w',h:[],age:'',reg:'',sub:'',dur:-1,int:0,a:{},ai:{},fl:[],qi:0,Q:[],more:0,nm:0});r()}
+document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('[data-r]');if(t)pr(t.dataset.r)});
+r();
+</script></body></html>
